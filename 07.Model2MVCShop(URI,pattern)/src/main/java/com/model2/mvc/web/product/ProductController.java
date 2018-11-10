@@ -2,7 +2,9 @@ package com.model2.mvc.web.product;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,6 +48,8 @@ public class ProductController{
 		//Business Logic
 		productService.addProduct(product);
 		
+		
+		
 		return "forward:/product/addProduct.jsp";
 	}
 		
@@ -81,13 +85,33 @@ public class ProductController{
 	}
 	
 		@RequestMapping(value="getProduct", method=RequestMethod.GET)
-		public String getProduct (@ModelAttribute("product") Product product, Model model) throws Exception{
+		public String getProduct (@ModelAttribute("product") Product product, @RequestParam("prodNo") String prodNo, 
+								  Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		System.out.println("여기는 productController getProduct");
 		
 		product = productService.getProduct(product.getProdNo());
 		
 		model.addAttribute("product", product);
+		
+		Cookie[] cookies = request.getCookies();
+		if(cookies!=null && cookies.length>0) {
+			System.out.println("기존 Cookie 이용");
+		  for(int i=0;i<cookies.length;i++) {	
+			  Cookie cookie = cookies[i];
+			if(cookie.getName().equals("history")) {
+				cookie.setValue(cookie.getValue()+","+prodNo);
+				cookie.setMaxAge(60*60);
+				response.addCookie(cookie);
+			}else{
+			System.out.println("Cookie 첫 생성");
+			cookie = new Cookie("history",prodNo);
+			cookie.setMaxAge(60*60);
+			response.addCookie(cookie);
+			}
+		  }
+		}
+		
 		
 		return "forward:/product/getProduct.jsp"; 
 	}
