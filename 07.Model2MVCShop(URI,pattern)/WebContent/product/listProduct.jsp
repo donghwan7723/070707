@@ -196,7 +196,7 @@
 		  	   </c:if>
 		  	   
 		  	   <c:if test="${trimTranCode=='1'}">
-		  	   		${'구매완료'}<a href ="/product/updateTranCodeByProd?prodNo=${product.prodNo}&tranCode=${product.proTranCode}">배송하기</a>
+		  	   		${'구매완료'}<a href ="/purchase/updateTranCodeByProd?prodNo=${product.prodNo}&tranCode=2">배송하기</a>
 		  	   </c:if>
 		  	   
 		  	   <c:if test="${trimTranCode=='2'}">

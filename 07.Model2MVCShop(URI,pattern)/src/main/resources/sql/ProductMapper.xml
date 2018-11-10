@@ -103,7 +103,7 @@
 						 			prod_name LIKE '%'||#{searchKeyword}||'%'
 								</if>
 								<if test="searchCondition == 2 and searchKeyword !='' ">
-						 			pirce LIKE '%'||#{searchKeyword}||'%'
+						 			price LIKE '%'||#{searchKeyword}||'%'
 								</if>
 							</where>
 						</if> 
