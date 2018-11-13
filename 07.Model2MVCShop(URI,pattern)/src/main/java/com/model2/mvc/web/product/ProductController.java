@@ -45,11 +45,12 @@ public class ProductController{
 	public String addProduct (@ModelAttribute("product") Product product) throws Exception {
 	
 		System.out.println("여기는 productController addProduct");
+		
+		
+		
 		//Business Logic
 		productService.addProduct(product);
-		
-		
-		
+
 		return "forward:/product/addProduct.jsp";
 	}
 		
@@ -101,12 +102,14 @@ public class ProductController{
 			  Cookie cookie = cookies[i];
 			if(cookie.getName().equals("history")) {
 				cookie.setValue(cookie.getValue()+","+prodNo);
+				cookie.setPath("/");
 				cookie.setMaxAge(60*60);
 				response.addCookie(cookie);
 			}else{
 			System.out.println("Cookie 첫 생성");
 			cookie = new Cookie("history",prodNo);
 			cookie.setMaxAge(60*60);
+			cookie.setPath("/");
 			response.addCookie(cookie);
 			}
 		  }
