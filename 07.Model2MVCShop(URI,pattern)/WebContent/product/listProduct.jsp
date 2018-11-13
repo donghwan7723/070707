@@ -50,7 +50,7 @@
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post">
+<form name="detailForm" action="/product/listProduct?menu=${param.menu}&sortCondition=${param.sortCondition}" method="post">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -121,7 +121,8 @@
 		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">상품명</td>
 		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">가격<a href="/product/listProduct?sortCodtin=desc&menu=search">▲</a></td>
+		<td class="ct_list_b" width="150">가격<a href="/product/listProduct?sortCondition=desc&menu=search">▲</a>
+											 <a href="/product/listProduct?sortCondition=asc&menu=search">▼</a></td>
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">등록일</td>	
 		<td class="ct_line02"></td>

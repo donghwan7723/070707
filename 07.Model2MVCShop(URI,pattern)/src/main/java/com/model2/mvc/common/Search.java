@@ -6,6 +6,7 @@ public class Search {
 	
 	///Field
 	private int currentPage;
+	private String sortCondition;
 	private String searchCondition;
 	private String searchKeyword;
 	private int pageSize;
@@ -21,6 +22,13 @@ public class Search {
 	}
 	
 	///Method
+	public String getSortCondition() {
+		return sortCondition;
+	}
+	public void setSortCondition(String sortCondition) {
+		this.sortCondition = sortCondition;
+	}
+	
 	public int getPageSize() {
 		return pageSize;
 	}
@@ -63,6 +71,6 @@ public class Search {
 		return "Search [currentPage=" + currentPage + ", searchCondition="
 				+ searchCondition + ", searchKeyword=" + searchKeyword
 				+ ", pageSize=" + pageSize + ", endRowNum=" + endRowNum
-				+ ", startRowNum=" + startRowNum + "]";
+				+ ", startRowNum=" + startRowNum + ", sortCondition="+sortCondition+"]";
 	}
 }

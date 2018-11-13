@@ -74,7 +74,16 @@
 												
 											</if>
 		GROUP BY prd.prod_no, prd.prod_name, prd.price, prd.reg_date, tra.tran_status_code
-		ORDER BY prd.prod_no ) inner_table
+		<if test="sortCondition==null">
+			ORDER BY prd.prod_no 
+		</if>
+		<if test="sortCondition=='desc'">
+			ORDER BY prd.price DESC
+		</if>
+		<if test="sortCondition=='asc'">
+			ORDER BY prd.price ASC
+		</if>
+		) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -107,6 +116,15 @@
 								</if>
 							</where>
 						</if> 
+		<if test="sortCondition==null">
+			ORDER BY prod_no 
+		</if>
+		<if test="sortCondition=='desc'">
+			ORDER BY price DESC
+		</if>
+		<if test="sortCondition=='asc'">
+			ORDER BY price ASC
+		</if>
 						) countTable						
 	 </select>
 	  
