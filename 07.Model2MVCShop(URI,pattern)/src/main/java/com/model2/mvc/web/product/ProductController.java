@@ -1,6 +1,8 @@
 package com.model2.mvc.web.product;
 
+import java.net.InetAddress;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -96,6 +98,7 @@ public class ProductController{
 		
 		model.addAttribute("product", product);
 		
+		//Cookie
 		Cookie[] cookies = request.getCookies();
 		if(cookies!=null && cookies.length>0) {
 			System.out.println("기존 Cookie 이용");
@@ -117,6 +120,23 @@ public class ProductController{
 		}
 		
 		
+		//조회수  
+		//user ip주소 저장
+//		InetAddress local = InetAddress.getLocalHost();
+//		String ip = local.getHostAddress();
+//		
+//		Vector<String> ipVector = new Vector<String>();
+//		for(int i=0;i<=ipVector.size();i++) {
+//			
+//			if(ipVector.elementAt(i).equals(ip)) {
+//				
+//			}else {
+//				ipVector.addElement(ip);
+//			}
+//		}
+//		
+//		
+//		
 		return "forward:/product/getProduct.jsp"; 
 	}
 		
