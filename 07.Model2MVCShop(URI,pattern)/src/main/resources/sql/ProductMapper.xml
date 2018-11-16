@@ -53,7 +53,7 @@
 		 
  
 	<!--   SQL : SELECT LIST--> 
-	<select  id="getProductList"  parameterType="map"	resultMap="productSelectMap">
+	<select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.*, ROWNUM AS row_seq
 	  					FROM		(	SELECT prd.prod_no, prd.prod_name, prd.price, prd.reg_date, 
@@ -70,18 +70,29 @@
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 										 			  AND prd.price LIKE '%'||#{searchKeyword}||'%'
+	
 													</if>
-												
+												<if test="sortCondition==null">
+													ORDER BY prd.prod_no 
+												</if>
+												<if test="sortCondition =='asc'">	
+													ORDER BY prd.price ASC
+												</if>
+												<if test="sortCondition =='desc'">	
+												    ORDER BY prd.price DESC    
+												</if>
 											</if>
 		GROUP BY prd.prod_no, prd.prod_name, prd.price, prd.reg_date, tra.tran_status_code
-		<if test="sortCondition==null">
-			ORDER BY prd.prod_no 
-		</if>
-		<if test="sortCondition=='desc'">
-			ORDER BY prd.price DESC
-		</if>
-		<if test="sortCondition=='asc'">
-			ORDER BY prd.price ASC
+	    <if test="searchCondition==null">	
+			<if test="sortCondition==null">
+				ORDER BY prd.prod_no 
+			</if>
+			<if test="sortCondition=='desc'">
+				ORDER BY prd.price DESC
+			</if>
+			<if test="sortCondition=='asc'">
+				ORDER BY prd.price ASC
+			</if>
 		</if>
 		) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -115,17 +126,28 @@
 						 			price LIKE '%'||#{searchKeyword}||'%'
 								</if>
 							</where>
+								<if test="sortCondition==null">
+									ORDER BY prod_no 
+								</if>
+								<if test="sortCondition =='asc'">	
+									ORDER BY price ASC
+								</if>
+								<if test="sortCondition =='desc'">	
+								    ORDER BY price DESC    
+								</if>
 						</if> 
-		<if test="sortCondition==null">
-			ORDER BY prod_no 
+	    <if test="searchCondition==null">	
+			<if test="sortCondition==null">
+				ORDER BY prod_no 
+			</if>
+			<if test="sortCondition=='desc'">
+				ORDER BY price DESC
+			</if>
+			<if test="sortCondition=='asc'">
+				ORDER BY price ASC
+			</if>
 		</if>
-		<if test="sortCondition=='desc'">
-			ORDER BY price DESC
-		</if>
-		<if test="sortCondition=='asc'">
-			ORDER BY price ASC
-		</if>
-						) countTable						
+	) countTable						
 	 </select>
 	  
 </mapper>
