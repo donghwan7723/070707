@@ -57,20 +57,19 @@ public class ProductController{
 	}
 		
 	@RequestMapping(value="listProduct")
-	public String listProduct(@ModelAttribute("search") Search search,
-							  @RequestParam("sortCondition") String sortCondition
+	public String listProduct(@ModelAttribute("search") Search search
 							   ,Model model) throws Exception {
-		
+	//	 @RequestParam("searchKeyword") String searchKeyword,
 		System.out.println("여기는 productController listProduct");
+		System.out.println(search);
 		
-		System.out.println("sortCondition : "+sortCondition);
 		
 		if(search.getCurrentPage()==0) {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		search.setSortCondition(sortCondition);
 
+	//	search.setSearchKeyword(searchKeyword);
 		
 		//Business Logic 수행
 		Map<String, Object> map = productService.getProductList(search);

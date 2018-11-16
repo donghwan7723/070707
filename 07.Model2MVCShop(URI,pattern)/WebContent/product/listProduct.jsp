@@ -50,7 +50,7 @@
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/product/listProduct?menu=${param.menu}&sortCondition=${param.sortCondition}" method="post">
+<form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -110,7 +110,14 @@
 	</tr>
 </table>
 
+	<select name="sortCondition" class="ct_input_g" style="width:80px" onchange="if(this.value) location.href=(this.value);">
 
+		<option>가격순 </option>
+		<option value="/product/listProduct?sortCondition=desc&menu=${param.menu}">높은가격순</option>
+		<option value="/product/listProduct?sortCondition=asc&menu=${param.menu}">낮은가격순</option>	
+	</select>   
+
+						
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
 	<tr>
 		<td colspan="11" >
@@ -121,8 +128,9 @@
 		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">상품명</td>
 		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">가격<a href="/product/listProduct?sortCondition=desc&menu=search">▲</a>
-											 <a href="/product/listProduct?sortCondition=asc&menu=search">▼</a></td>
+		<td class="ct_list_b" width="150">가격</td>
+											 
+						 
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">등록일</td>	
 		<td class="ct_line02"></td>
